@@ -840,42 +840,39 @@ void GuiMenu::openQuitMenu()
 	Window* window = mWindow;
 
 	ComponentListRow row;
-	if (UIModeController::getInstance()->isUIModeFull())
-	{
 		row.makeAcceptInputHandler([window] {
 			window->pushGui(new GuiMsgBox(window, "REALLY RESTART?", "YES",
 				[] {
-				Scripting::fireEvent("quit");
+				Scripting::fireEvent("quit", "restart");
 				if(quitES(QuitMode::RESTART) != 0)
 					LOG(LogWarning) << "Restart terminated with non-zero result!";
+				/*runSystemCommand("systemctl restart emustation.service");*/
 			}, "NO", nullptr));
 		});
 		row.addElement(std::make_shared<TextComponent>(window, "RESTART EMULATIONSTATION", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 		s->addRow(row);
 
+	row.elements.clear();
+	row.makeAcceptInputHandler([window] {
+			window->pushGui(new GuiMsgBox(window, "QUIT TO RETROARCH?", "YES",
+				[] {
+				remove("/var/lock/start.games");
+           		runSystemCommand("touch /var/lock/start.retro");
+		        runSystemCommand("systemctl start retroarch.service");
+				Scripting::fireEvent("quit", "retroarch");
+				quitES();
+			}, "NO", nullptr));
+		});
+		row.addElement(std::make_shared<TextComponent>(window, "START RETROARCH", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+		s->addRow(row);
 
-
-		if(Settings::getInstance()->getBool("ShowExit"))
-		{
-			row.elements.clear();
-			row.makeAcceptInputHandler([window] {
-				window->pushGui(new GuiMsgBox(window, "REALLY QUIT?", "YES",
-					[] {
-					Scripting::fireEvent("quit");
-					quitES();
-				}, "NO", nullptr));
-			});
-			row.addElement(std::make_shared<TextComponent>(window, "QUIT EMULATIONSTATION", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-			s->addRow(row);
-		}
-	}
 	row.elements.clear();
 	row.makeAcceptInputHandler([window] {
 		window->pushGui(new GuiMsgBox(window, "REALLY RESTART?", "YES",
 			[] {
 			Scripting::fireEvent("quit", "reboot");
 			Scripting::fireEvent("reboot");
-			if (quitES(QuitMode::REBOOT) != 0)
+			if (system("systemctl reboot") != 0)
 				LOG(LogWarning) << "Restart terminated with non-zero result!";
 		}, "NO", nullptr));
 	});
@@ -888,7 +885,7 @@ void GuiMenu::openQuitMenu()
 			[] {
 			Scripting::fireEvent("quit", "shutdown");
 			Scripting::fireEvent("shutdown");
-			if (quitES(QuitMode::SHUTDOWN) != 0)
+			if (system("systemctl poweroff") != 0)
 				LOG(LogWarning) << "Shutdown terminated with non-zero result!";
 		}, "NO", nullptr));
 	});

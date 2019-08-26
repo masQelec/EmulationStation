@@ -55,6 +55,40 @@ void Settings::setDefaults()
 	mBoolMap.clear();
 	mIntMap.clear();
 
+/* emuELEC default settings */
+	mBoolMap["SSH"] = true;
+	mBoolMap["BGM"] = false;
+	mStringMap["EmuELEC_BGM_BOOT"] = "No";
+	mStringMap["EmuELEC_BOOT"] = "Emulationstation";
+	mStringMap["EmuELEC_FBN_CORE"] = "Libretro_fbneo";
+	mStringMap["EmuELEC_GBA_CORE"] = "Libretro_mgba";
+	mStringMap["EmuELEC_GBC_CORE"] = "Libretro_gambatte";
+	mStringMap["EmuELEC_GEN_CORE"] = "Libretro_genesis_plus_gx";
+	mStringMap["EmuELEC_MAME_CORE"] = "Libretro_mame2003_plus";
+	mStringMap["EmuELEC_ARCADE_CORE"] = "Libretro_mame2003_plus";
+	mStringMap["EmuELEC_N64_CORE"] = "Libretro_mupen64plus_next";
+	mStringMap["EmuELEC_NES_CORE"] = "Libretro_nestopia";
+	mStringMap["EmuELEC_PSP_CORE"] = "PPSSPPSA";
+	mStringMap["EmuELEC_SNES_CORE"] = "Libretro_snes9x";
+	mStringMap["EmuELEC_DOSBOX_CORE"] = "Libretro_dosbox";
+	mStringMap["EmuELEC_AMIGA_CORE"] = "Libretro_puae";
+	mStringMap["EmuELEC_REICAST_CORE"] = "REICASTSA";
+   mStringMap["EmuELEC_NEOCD_CORE"] = "Libretro_libneocd";
+	mBoolMap["EmuELEC_BEZELS"] = false;
+	mBoolMap["EmuELEC_SPLASH"] = false;
+   mStringMap["EmuELEC_SMS_CORE"] = "Libretro_gearsystem";
+	mStringMap["EmuELEC_HATARI_CORE"] = "Libretro_hatari";
+/* space for other settings in the future 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+/* end emuELEC default settings */
+
 	mBoolMap["BackgroundJoystickInput"] = false;
 	mBoolMap["ParseGamelistOnly"] = false;
 	mBoolMap["ShowHiddenFiles"] = false;
@@ -68,7 +102,7 @@ void Settings::setDefaults()
 
 	mBoolMap["VSync"] = true;
 
-	mBoolMap["EnableSounds"] = true;
+	mBoolMap["EnableSounds"] = false;
 	mBoolMap["ShowHelpPrompts"] = true;
 	mBoolMap["ScrapeRatings"] = true;
 	mBoolMap["IgnoreGamelist"] = false;
@@ -143,7 +177,7 @@ void Settings::setDefaults()
 	#ifdef _RPI_
 		mStringMap["AudioDevice"] = "PCM";
 	#else
-		mStringMap["AudioDevice"] = "Master";
+		mStringMap["AudioDevice"] = "PCM";
 	#endif
 
 	mStringMap["AudioCard"] = "default";

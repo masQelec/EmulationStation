@@ -26,6 +26,7 @@ private:
 	void openScreensaverOptions();
 	void openSoundSettings();
 	void openUISettings();
+	void openEmuELECSettings();
 
 	MenuComponent mMenu;
 	TextComponent mVersion;

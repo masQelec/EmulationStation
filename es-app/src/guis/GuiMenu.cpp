@@ -901,7 +901,7 @@ void GuiMenu::addVersionInfo()
 
 	mVersion.setFont(Font::get(FONT_SIZE_SMALL));
 	mVersion.setColor(0x5E5E5EFF);
-	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate);
+	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate +" emuELEC v" + getShOutput(R"(cat /storage/.config/EE_VERSION)") + " IP:" + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)"));
 	mVersion.setHorizontalAlignment(ALIGN_CENTER);
 	addChild(&mVersion);
 }

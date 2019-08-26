@@ -340,6 +340,20 @@ void GuiMenu::openEmuELECSettings()
 		});
 	/* END CHOICE */
 	/* CHOICE */
+	auto emuelec_scummvm_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "Scummvm", false);
+         emuchoices.clear();  
+    for(std::stringstream ss(getShOutput(R"(~/.emulationstation/scripts/getcores.sh scummvm)")); getline(ss, a, ','); )
+        emuchoices.push_back(a);
+    
+		for (auto it = emuchoices.cbegin(); it != emuchoices.cend(); it++) {
+		emuelec_scummvm_def->add(*it, *it, Settings::getInstance()->getString("EmuELEC_SCUMMVM_CORE") == *it); }
+		s->addWithLabel("Scummvm", emuelec_scummvm_def);
+		s->addSaveFunc([emuelec_scummvm_def] {
+			if (Settings::getInstance()->getString("EmuELEC_SCUMMVM_CORE") != emuelec_scummvm_def->getSelected())
+				Settings::getInstance()->setString("EmuELEC_SCUMMVM_CORE", emuelec_scummvm_def->getSelected());
+		});
+	/* END CHOICE */
+	/* CHOICE */
 	auto emuelec_dreamcast_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "SEGA DREAMCAST", false);
          emuchoices.clear();  
     for(std::stringstream ss(getShOutput(R"(~/.emulationstation/scripts/getcores.sh dreamcast)")); getline(ss, a, ','); )

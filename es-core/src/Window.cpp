@@ -10,6 +10,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <SDL_events.h>
+#include "utils/FileSystemUtil.h"
 
 Window::Window() : mNormalizeNextUpdate(false), mFrameTimeElapsed(0), mFrameCountElapsed(0), mAverageDeltaTime(10),
 	mAllowSleep(true), mSleeping(false), mTimeSinceLastInput(0), mScreenSaver(NULL), mRenderScreenSaver(false), mInfoPopup(NULL)
@@ -93,7 +94,15 @@ bool Window::init()
 	// update our help because font sizes probably changed
 	if(peekGui())
 		peekGui()->updateHelpPrompts();
-
+      
+      // emuelec
+      if(Utils::FileSystem::exists("/emuelec/bin/fbfix")) {
+      system("/emuelec/bin/fbfix");      
+  } else { 
+	  if(Utils::FileSystem::exists("/storage/.kodi/addons/script.emuelec.Amlogic-ng.launcher/bin/fbfix")) {
+	   system("/storage/.kodi/addons/script.emuelec.Amlogic-ng.launcher/bin/fbfix");
+	  }
+  }
 	return true;
 }
 

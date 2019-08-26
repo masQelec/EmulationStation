@@ -69,7 +69,26 @@ void GuiMenu::openEmuELECSettings()
 			Settings::getInstance()->setBool("EmuELEC_wifi", wifi_enabled->getState());
 		});
 	    */
-	    
+	auto emuelec_video_mode = std::make_shared< OptionListComponent<std::string> >(mWindow, "Video Mode", false);
+        std::vector<std::string> videomode;
+		videomode.push_back("1080p60hz");
+		videomode.push_back("1080i60hz");
+		videomode.push_back("720p60hz");
+		videomode.push_back("720p50hz");
+		videomode.push_back("480p60hz");
+		videomode.push_back("480cvbs");
+		videomode.push_back("576p50hz");
+		videomode.push_back("1080p50hz");
+		videomode.push_back("1080i50hz");
+		videomode.push_back("576cvbs");
+		for (auto it = videomode.cbegin(); it != videomode.cend(); it++) {
+		emuelec_video_mode->add(*it, *it, Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") == *it); }
+		s->addWithLabel("Video Mode", emuelec_video_mode);
+		s->addSaveFunc([emuelec_video_mode] {
+			if (Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") != emuelec_video_mode->getSelected())
+				Settings::getInstance()->setString("EmuELEC_VIDEO_MODE", emuelec_video_mode->getSelected());
+		});
+	
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bgm_enabled->setState(Settings::getInstance()->getBool("BGM"));
 		s->addWithLabel("ENABLE BGM", bgm_enabled);

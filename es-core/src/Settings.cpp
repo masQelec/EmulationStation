@@ -73,20 +73,12 @@ void Settings::setDefaults()
 	mStringMap["EmuELEC_DOSBOX_CORE"] = "Libretro_dosbox";
 	mStringMap["EmuELEC_AMIGA_CORE"] = "Libretro_puae";
 	mStringMap["EmuELEC_REICAST_CORE"] = "REICASTSA";
-   mStringMap["EmuELEC_NEOCD_CORE"] = "Libretro_libneocd";
+	mStringMap["EmuELEC_NEOCD_CORE"] = "Libretro_libneocd";
 	mBoolMap["EmuELEC_BEZELS"] = false;
 	mBoolMap["EmuELEC_SPLASH"] = false;
-   mStringMap["EmuELEC_SMS_CORE"] = "Libretro_gearsystem";
+	mStringMap["EmuELEC_SMS_CORE"] = "Libretro_gearsystem";
 	mStringMap["EmuELEC_HATARI_CORE"] = "Libretro_hatari";
-/* space for other settings in the future 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
- * 
+	mStringMap["EmuELEC_VIDEO_MODE"] = "1080p60hz";
 /* end emuELEC default settings */
 
 	mBoolMap["BackgroundJoystickInput"] = false;

@@ -78,6 +78,7 @@ void Settings::setDefaults()
 	mBoolMap["EmuELEC_SPLASH"] = false;
 	mStringMap["EmuELEC_SMS_CORE"] = "Libretro_gearsystem";
 	mStringMap["EmuELEC_HATARI_CORE"] = "Libretro_hatari";
+		mStringMap["EmuELEC_HATARI_CORE"] = "SCUMMVMSA";
 	mStringMap["EmuELEC_VIDEO_MODE"] = "1080p60hz";
 /* end emuELEC default settings */
 

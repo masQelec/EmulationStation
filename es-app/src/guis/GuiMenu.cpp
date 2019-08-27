@@ -880,7 +880,7 @@ void GuiMenu::openQuitMenu()
 				Scripting::fireEvent("quit", "restart");
 				if(quitES(QuitMode::RESTART) != 0)
 					LOG(LogWarning) << "Restart terminated with non-zero result!";
-				/*runSystemCommand("systemctl restart emustation.service");*/
+				runSystemCommand("systemctl restart emustation.service");
 			}, "NO", nullptr));
 		});
 		row.addElement(std::make_shared<TextComponent>(window, "RESTART EMULATIONSTATION", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
@@ -894,6 +894,7 @@ void GuiMenu::openQuitMenu()
            		runSystemCommand("touch /var/lock/start.retro");
 		        runSystemCommand("systemctl start retroarch.service");
 				Scripting::fireEvent("quit", "retroarch");
+				runSystemCommand("systemctl stop emustation.service");
 				quitES();
 			}, "NO", nullptr));
 		});

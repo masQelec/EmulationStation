@@ -87,6 +87,7 @@ void GuiMenu::openEmuELECSettings()
 		s->addSaveFunc([emuelec_video_mode] {
 			if (Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") != emuelec_video_mode->getSelected())
 				Settings::getInstance()->setString("EmuELEC_VIDEO_MODE", emuelec_video_mode->getSelected());
+				runSystemCommand("echo "+emuelec_video_mode->getSelected()+" > /sys/class/display/mode");
 		});
 	
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);

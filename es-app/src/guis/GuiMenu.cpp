@@ -903,6 +903,20 @@ void GuiMenu::openQuitMenu()
 
 	row.elements.clear();
 	row.makeAcceptInputHandler([window] {
+			window->pushGui(new GuiMsgBox(window, "REBOOT FROM NAND?", "YES",
+				[] {
+				Scripting::fireEvent("quit", "nand");
+				runSystemCommand("rebootfromnand");
+				runSystemCommand("sync");
+				runSystemCommand("systemctl reboot");
+				quitES();
+			}, "NO", nullptr));
+		});
+		row.addElement(std::make_shared<TextComponent>(window, "REBOOT FROM NAND", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+		s->addRow(row);
+		
+	row.elements.clear();
+	row.makeAcceptInputHandler([window] {
 		window->pushGui(new GuiMsgBox(window, "REALLY RESTART?", "YES",
 			[] {
 			Scripting::fireEvent("quit", "reboot");

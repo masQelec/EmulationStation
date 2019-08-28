@@ -921,6 +921,7 @@ void GuiMenu::openQuitMenu()
 			[] {
 			Scripting::fireEvent("quit", "reboot");
 			Scripting::fireEvent("reboot");
+			runSystemCommand("sync");
 			if (system("systemctl reboot") != 0)
 				LOG(LogWarning) << "Restart terminated with non-zero result!";
 		}, "NO", nullptr));
@@ -934,6 +935,7 @@ void GuiMenu::openQuitMenu()
 			[] {
 			Scripting::fireEvent("quit", "shutdown");
 			Scripting::fireEvent("shutdown");
+			runSystemCommand("sync");
 			if (system("systemctl poweroff") != 0)
 				LOG(LogWarning) << "Shutdown terminated with non-zero result!";
 		}, "NO", nullptr));

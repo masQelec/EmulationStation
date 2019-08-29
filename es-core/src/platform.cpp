@@ -88,6 +88,7 @@ void processQuitMode()
 	}
 }
 
+/* < emuelec */
 std::string getShOutput(const std::string& mStr)
 {
     std::string result, file;
@@ -103,5 +104,5 @@ std::string getShOutput(const std::string& mStr)
     pclose(pipe);
     return result;
 }
-
+/* emuelec >*/
 

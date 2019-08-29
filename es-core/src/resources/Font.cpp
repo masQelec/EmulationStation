@@ -259,16 +259,16 @@ std::vector<std::string> getFallbackFontPaths()
 
 #else
 	// Linux
-
+/* < emuelec */
 	const char* paths[] = {
 		/*"/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
 		"/usr/share/fonts/truetype/freefont/FreeMono.ttf",
 		"/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf" // japanese, chinese, present on Debian*/
-		"/storage/.emulationstation/resources/fonts/truetype/dejavu/DejaVuSans.ttf",
+		"/storage/.emulationstation/resources/fonts/truetype/dejavu/DejaVuSans.ttf", 
 		"/storage/.emulationstation/resources/fonts/truetype/freefont/FreeMono.ttf",
 		"/storage/.emulationstation/resources/fonts/truetype/droid/DroidSansFallbackFull.ttf" // japanese, chinese, present on Debian
 	};
-
+/* emuelec > */
 	std::vector<std::string> fontPaths;
 	for(unsigned int i = 0; i < sizeof(paths) / sizeof(paths[0]); i++)
 	{

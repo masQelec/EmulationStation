@@ -10,7 +10,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <SDL_events.h>
-#include "utils/FileSystemUtil.h"
+#include "utils/FileSystemUtil.h" /* < emuelec */
 
 Window::Window() : mNormalizeNextUpdate(false), mFrameTimeElapsed(0), mFrameCountElapsed(0), mAverageDeltaTime(10),
 	mAllowSleep(true), mSleeping(false), mTimeSinceLastInput(0), mScreenSaver(NULL), mRenderScreenSaver(false), mInfoPopup(NULL)
@@ -95,14 +95,14 @@ bool Window::init()
 	if(peekGui())
 		peekGui()->updateHelpPrompts();
       
-      // emuelec
+      /* < emuelec */
       if(Utils::FileSystem::exists("/emuelec/bin/fbfix")) {
       system("/emuelec/bin/fbfix");      
   } else { 
 	  if(Utils::FileSystem::exists("/storage/.kodi/addons/script.emuelec.Amlogic-ng.launcher/bin/fbfix")) {
 	   system("/storage/.kodi/addons/script.emuelec.Amlogic-ng.launcher/bin/fbfix");
 	  }
-  }
+  } /* < emuelec */
 	return true;
 }
 
@@ -453,7 +453,7 @@ void Window::startScreenSaver()
 
 		mScreenSaver->startScreenSaver();
 		mRenderScreenSaver = true;
-                Scripting::fireEvent("screensaver-start");
+                Scripting::fireEvent("screensaver-start"); /* < emuelec */
 	}
 }
 
@@ -468,7 +468,7 @@ bool Window::cancelScreenSaver()
 		// Tell the GUI components the screensaver has stopped
 		for(auto i = mGuiStack.cbegin(); i != mGuiStack.cend(); i++)
 			(*i)->onScreenSaverDeactivate();
-		Scripting::fireEvent("screensaver-stop");
+		Scripting::fireEvent("screensaver-stop"); /* < emuelec */
 		return true;
 	}
 

@@ -78,7 +78,7 @@ void Settings::setDefaults()
 	mBoolMap["EmuELEC_SPLASH"] = false;
 	mStringMap["EmuELEC_SMS_CORE"] = "Libretro_gearsystem";
 	mStringMap["EmuELEC_HATARI_CORE"] = "Libretro_hatari";
-		mStringMap["EmuELEC_HATARI_CORE"] = "SCUMMVMSA";
+	mStringMap["EmuELEC_SCUMMVM_CORE"] = "SCUMMVMSA";
 	mStringMap["EmuELEC_VIDEO_MODE"] = "1080p60hz";
 /* end emuELEC default settings */
 
@@ -95,7 +95,7 @@ void Settings::setDefaults()
 
 	mBoolMap["VSync"] = true;
 
-	mBoolMap["EnableSounds"] = false;
+	mBoolMap["EnableSounds"] = false; /* < emuelec */
 	mBoolMap["ShowHelpPrompts"] = true;
 	mBoolMap["ScrapeRatings"] = true;
 	mBoolMap["IgnoreGamelist"] = false;
@@ -172,7 +172,7 @@ void Settings::setDefaults()
 	#ifdef _RPI_
 		mStringMap["AudioDevice"] = "PCM";
 	#else
-		mStringMap["AudioDevice"] = "PCM";
+		mStringMap["AudioDevice"] = "PCM"; /* < emuelec */
 	#endif
 
 	mStringMap["AudioCard"] = "default";

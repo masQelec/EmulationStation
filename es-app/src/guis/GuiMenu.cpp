@@ -25,7 +25,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 	bool isFullUI = UIModeController::getInstance()->isUIModeFull();
 
 	if (isFullUI)
-	    addEntry("EmuELEC", 0x777777FF, true, [this] { openEmuELECSettings(); });
+	    addEntry("EmuELEC", 0x777777FF, true, [this] { openEmuELECSettings(); }); /* < emuelec */
 	
 	if (isFullUI)
 		addEntry("SCRAPER", 0x777777FF, true, [this] { openScraperSettings(); });
@@ -52,7 +52,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 	setSize(mMenu.getSize());
 	setPosition((Renderer::getScreenWidth() - mSize.x()) / 2, Renderer::getScreenHeight() * 0.15f);
 }
-
+/* < emuelec */
 void GuiMenu::openEmuELECSettings()
 {
 	auto s = new GuiSettings(mWindow, "EmuELEC Settings");
@@ -452,6 +452,7 @@ void GuiMenu::openEmuELECSettings()
 	mWindow->pushGui(s);
  }
 }
+/*  emuelec >*/
 
 void GuiMenu::openScraperSettings()
 {
@@ -866,7 +867,7 @@ void GuiMenu::openConfigInput()
 	);
 
 }
-
+/* < emuelec */
 void GuiMenu::openQuitMenu()
 {
 	auto s = new GuiSettings(mWindow, "QUIT");
@@ -945,6 +946,7 @@ void GuiMenu::openQuitMenu()
 
 	mWindow->pushGui(s);
 }
+/*  emuelec > */
 
 void GuiMenu::addVersionInfo()
 {
@@ -952,7 +954,7 @@ void GuiMenu::addVersionInfo()
 
 	mVersion.setFont(Font::get(FONT_SIZE_SMALL));
 	mVersion.setColor(0x5E5E5EFF);
-	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate +" emuELEC v" + getShOutput(R"(cat /storage/.config/EE_VERSION)") + " IP:" + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)"));
+	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate +" emuELEC v" + getShOutput(R"(cat /storage/.config/EE_VERSION)") + " IP:" + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)")); /* < emuelec */
 	mVersion.setHorizontalAlignment(ALIGN_CENTER);
 	addChild(&mVersion);
 }

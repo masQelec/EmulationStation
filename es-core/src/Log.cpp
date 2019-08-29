@@ -15,7 +15,7 @@ LogLevel Log::getReportingLevel()
 std::string Log::getLogPath()
 {
 	std::string home = Utils::FileSystem::getHomePath();
-	return home + "/.config/emuelec/logs/es_log.txt";
+	return home + "/.config/emuelec/logs/es_log.txt"; /* < emuelec */
 }
 
 void Log::setReportingLevel(LogLevel level)

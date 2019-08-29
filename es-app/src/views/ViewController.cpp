@@ -5,7 +5,7 @@
 #include "animations/LaunchAnimation.h"
 #include "animations/MoveCameraAnimation.h"
 #include "guis/GuiMenu.h"
-#include "guis/GuiDetectDevice.h"
+#include "guis/GuiDetectDevice.h" /* < emuelec */
 #include "views/gamelist/DetailedGameListView.h"
 #include "views/gamelist/IGameListView.h"
 #include "views/gamelist/GridGameListView.h"
@@ -360,7 +360,7 @@ bool ViewController::input(InputConfig* config, Input input)
 	if(mLockInput)
 		return true;
 
-        // batocera
+        // batocera /* < emuelec */
 	/* if we receive a button pressure for a non configured joystick, suggest the joystick configuration */
         if(config->isConfigured() == false) {
 	  if(input.type == TYPE_BUTTON) {

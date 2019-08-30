@@ -71,47 +71,6 @@ void GuiMenu::openEmuELECSettings()
 		});
 	    */
 	std::string a;
-	auto emuelec_video_mode = std::make_shared< OptionListComponent<std::string> >(mWindow, "Video Mode", false);
-        std::vector<std::string> videomode;
-  /* for(std::stringstream ss(getShOutput(R"(~/.config/emuelec/scripts/get_supported_resolutions.sh)")); getline(ss, a, ','); ) {
-        videomode.push_back(a);
-	}*/
-		videomode.push_back("1080p60hz");
-		videomode.push_back("1080i60hz");
-		videomode.push_back("720p60hz");
-		videomode.push_back("720p50hz");
-		videomode.push_back("480p60hz");
-		videomode.push_back("480cvbs");
-		videomode.push_back("576p50hz");
-		videomode.push_back("1080p50hz");
-		videomode.push_back("1080i50hz");
-		videomode.push_back("576cvbs");
-		videomode.push_back("Custom");
-		for (auto it = videomode.cbegin(); it != videomode.cend(); it++) {
-		emuelec_video_mode->add(*it, *it, Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") == *it); }
-		s->addWithLabel("Video Mode", emuelec_video_mode);
-		s->addSaveFunc([emuelec_video_mode] {
-			if (Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") != emuelec_video_mode->getSelected())
-				Settings::getInstance()->setString("EmuELEC_VIDEO_MODE", emuelec_video_mode->getSelected());
-			if (emuelec_video_mode->getSelected() != "Custom") {
-				runSystemCommand("echo "+emuelec_video_mode->getSelected()+" > /sys/class/display/mode");
-				LOG(LogInfo) << "Setting video to " << emuelec_video_mode->getSelected();
-			} else { 
-			if(Utils::FileSystem::exists("/storage/.config/EE_VIDEO_MODE")) {
-				runSystemCommand("echo $(cat /storage/.config/EE_VIDEO_MODE) > /sys/class/display/mode");
-				LOG(LogInfo) << "Setting custom video mode from /storage/.config/EE_VIDEO_MODE to " << runSystemCommand("cat /storage/.config/EE_VIDEO_MODE");
-			} else { 
-				if(Utils::FileSystem::exists("/flash/EE_VIDEO_MODE")) {
-				runSystemCommand("echo $(cat /flash/EE_VIDEO_MODE) > /sys/class/display/mode");
-				LOG(LogInfo) << "Setting custom video mode from /flash/EE_VIDEO_MODE to " << runSystemCommand("cat /flash/EE_VIDEO_MODE");
-					} else {
-					runSystemCommand("echo 1080p60hz > /sys/class/display/mode");
-					LOG(LogInfo) << "EE_VIDEO_MODE was not found! Setting video mode to 1080p60hz";
-					}
-				}
-			}
-		});
-	
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bgm_enabled->setState(Settings::getInstance()->getBool("BGM"));
 		s->addWithLabel("ENABLE BGM", bgm_enabled);
@@ -148,19 +107,6 @@ void GuiMenu::openEmuELECSettings()
                 Settings::getInstance()->setBool("SSH", sshd_enabled->getState());
 			});
 			
-		auto emuelec_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "START AT BOOT", false);
-		std::vector<std::string> devices;
-		devices.push_back("Emulationstation");
-		devices.push_back("Retroarch");
-		/*devices.push_back("Kodi");*/
-		for (auto it = devices.cbegin(); it != devices.cend(); it++)
-		emuelec_boot_def->add(*it, *it, Settings::getInstance()->getString("EmuELEC_BOOT") == *it);
-		s->addWithLabel("START AT BOOT", emuelec_boot_def);
-		s->addSaveFunc([emuelec_boot_def] {
-			if (Settings::getInstance()->getString("EmuELEC_BOOT") != emuelec_boot_def->getSelected())
-				Settings::getInstance()->setString("EmuELEC_BOOT", emuelec_boot_def->getSelected());
-		});
-       
        auto bezels_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bezels_enabled->setState(Settings::getInstance()->getBool("EmuELEC_BEZELS"));
 		s->addWithLabel("ENABLE RA BEZELS", bezels_enabled);
@@ -433,45 +379,6 @@ void GuiMenu::openEmuELECSettings()
 	/* END CHOICE */
    
 	Window* window = mWindow;
-	
-	if (UIModeController::getInstance()->isUIModeFull())
-	{
-	row.addElement(std::make_shared<TextComponent>(window, "                                   !!!!!!!DANGER ZONE!!!!!!!", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-	row.elements.clear();
-
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "!!!!!!WARNING THIS WILL DELETE ALL EMULATOR CONFIGS!!!!!!!!!! RESET EmuELEC EMULATORS TO DEFAULT AND RESTART?", "YES",
-				[] { 
-				runSystemCommand("systemd-run /emuelec/scripts/clearconfig.sh EMUS");
-				}, "NO", nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, "RESET EmuELEC EMULATORS TO DEFAULT CONFIG", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-	row.elements.clear();
-	/*
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "!!!!!!WARNING THIS WILL DELETE ALL KODI ADDONS AND CONFIG!!!!!!!!!! RESET KODI TO DEFAULT CONFIG AND RESTART?", "YES",
-				[] { 
-				runSystemCommand("/usr/bin/clearconfig.sh KODI");
-				}, "NO", nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, "RESET KODI TO DEFAULT CONFIG", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-	row.elements.clear();
-	*/
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "!!!!!!WARNING THIS WILL DELETE ALL CONFIGS/ADDONS!!!!!!!!!! RESET SYSTEM TO DEFAULT CONFIG AND RESTART?", "YES",
-				[] { 
-				runSystemCommand("systemd-run /emuelec/scripts/clearconfig.sh ALL");
-				}, "NO", nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, "RESET SYSTEM TO DEFAULT CONFIG", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-	row.elements.clear();
-	
-	mWindow->pushGui(s);
- }
 }
 /*  emuelec >*/
 
@@ -896,73 +803,27 @@ void GuiMenu::openQuitMenu()
 	Window* window = mWindow;
 
 	ComponentListRow row;
-		row.makeAcceptInputHandler([window] {
-			window->pushGui(new GuiMsgBox(window, "REALLY RESTART?", "YES",
-				[] {
-				Scripting::fireEvent("quit", "restart");
-				if(quitES(QuitMode::RESTART) != 0)
-					LOG(LogWarning) << "Restart terminated with non-zero result!";
-				runSystemCommand("systemctl restart emustation.service");
-			}, "NO", nullptr));
-		});
-		row.addElement(std::make_shared<TextComponent>(window, "RESTART EMULATIONSTATION", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-		s->addRow(row);
-
 	row.elements.clear();
 	row.makeAcceptInputHandler([window] {
-			window->pushGui(new GuiMsgBox(window, "QUIT TO RETROARCH?", "YES",
+			window->pushGui(new GuiMsgBox(window, "START RETROARCH?", "YES",
 				[] {
-				remove("/var/lock/start.games");
-           		runSystemCommand("touch /var/lock/start.retro");
-		        runSystemCommand("systemctl start retroarch.service");
 				Scripting::fireEvent("quit", "retroarch");
-				runSystemCommand("systemctl stop emustation.service");
+				runSystemCommand("systemd-run /storage/.kodi/addons/script.emuelec.Amlogic.launcher/bin/ee_retroarch.sh");
 				quitES();
 			}, "NO", nullptr));
 		});
 		row.addElement(std::make_shared<TextComponent>(window, "START RETROARCH", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 		s->addRow(row);
 
-	row.elements.clear();
+		row.elements.clear();
 	row.makeAcceptInputHandler([window] {
-			window->pushGui(new GuiMsgBox(window, "REBOOT FROM NAND?", "YES",
-				[] {
-				Scripting::fireEvent("quit", "nand");
-				runSystemCommand("rebootfromnand");
-				runSystemCommand("sync");
-				runSystemCommand("systemctl reboot");
-				quitES();
-			}, "NO", nullptr));
-		});
-		row.addElement(std::make_shared<TextComponent>(window, "REBOOT FROM NAND", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-		s->addRow(row);
-		
-	row.elements.clear();
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "REALLY RESTART?", "YES",
+		window->pushGui(new GuiMsgBox(window, "QUIT BACK TO KODI?", "YES",
 			[] {
-			Scripting::fireEvent("quit", "reboot");
-			Scripting::fireEvent("reboot");
-			runSystemCommand("sync");
-			if (system("systemctl reboot") != 0)
-				LOG(LogWarning) << "Restart terminated with non-zero result!";
+			Scripting::fireEvent("quit");
+			quitES();
 		}, "NO", nullptr));
 	});
-	row.addElement(std::make_shared<TextComponent>(window, "RESTART SYSTEM", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-
-	row.elements.clear();
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "REALLY SHUTDOWN?", "YES",
-			[] {
-			Scripting::fireEvent("quit", "shutdown");
-			Scripting::fireEvent("shutdown");
-			runSystemCommand("sync");
-			if (system("systemctl poweroff") != 0)
-				LOG(LogWarning) << "Shutdown terminated with non-zero result!";
-		}, "NO", nullptr));
-	});
-	row.addElement(std::make_shared<TextComponent>(window, "SHUTDOWN SYSTEM", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+	row.addElement(std::make_shared<TextComponent>(window, "BACK TO KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 	s->addRow(row);
 
 	mWindow->pushGui(s);
@@ -975,7 +836,7 @@ void GuiMenu::addVersionInfo()
 
 	mVersion.setFont(Font::get(FONT_SIZE_SMALL));
 	mVersion.setColor(0x5E5E5EFF);
-	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate +" emuELEC v" + getShOutput(R"(cat /storage/.config/EE_VERSION)") + " IP:" + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)")); /* < emuelec */
+	mVersion.setText("EMULATIONSTATION V" + Utils::String::toUpper(PROGRAM_VERSION_STRING) + buildDate +" emuELEC-Addon v" + getShOutput(R"(cat /storage/.config/EE_VERSION)") + " IP:" + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)")); /* < emuelec */
 	mVersion.setHorizontalAlignment(ALIGN_CENTER);
 	addChild(&mVersion);
 }

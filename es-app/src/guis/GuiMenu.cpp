@@ -70,6 +70,7 @@ void GuiMenu::openEmuELECSettings()
 			Settings::getInstance()->setBool("EmuELEC_wifi", wifi_enabled->getState());
 		});
 	    */
+	Window* window = mWindow;
 	std::string a;
 	auto emuelec_video_mode = std::make_shared< OptionListComponent<std::string> >(mWindow, "Video Mode", false);
         std::vector<std::string> videomode;
@@ -90,13 +91,27 @@ void GuiMenu::openEmuELECSettings()
 		for (auto it = videomode.cbegin(); it != videomode.cend(); it++) {
 		emuelec_video_mode->add(*it, *it, Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") == *it); }
 		s->addWithLabel("Video Mode", emuelec_video_mode);
-		s->addSaveFunc([emuelec_video_mode] {
-			if (Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") != emuelec_video_mode->getSelected())
-				Settings::getInstance()->setString("EmuELEC_VIDEO_MODE", emuelec_video_mode->getSelected());
+	   	s->addSaveFunc([emuelec_video_mode, window] {
+			if (Settings::getInstance()->getString("EmuELEC_VIDEO_MODE") != emuelec_video_mode->getSelected()) {
 			if (emuelec_video_mode->getSelected() != "Custom") {
-				runSystemCommand("echo "+emuelec_video_mode->getSelected()+" > /sys/class/display/mode");
-				LOG(LogInfo) << "Setting video to " << emuelec_video_mode->getSelected();
-			} else { 
+			std::string selectedVideoMode = emuelec_video_mode->getSelected();
+			std::string msg = "You are about to set EmuELEC resolution to:\n" + selectedVideoMode + "\n";
+			if(Utils::FileSystem::exists("/ee_s905")) {
+			msg += "Emulationstation will restart.\n";
+		}
+			msg += "Do you want to proceed?";
+			window->pushGui(new GuiMsgBox(window, msg,
+				"YES", [selectedVideoMode] {
+					runSystemCommand("echo "+selectedVideoMode+" > /sys/class/display/mode");
+					Settings::getInstance()->setString("EmuELEC_VIDEO_MODE", selectedVideoMode);
+					Settings::getInstance()->saveFile();
+					LOG(LogInfo) << "Setting video to " << selectedVideoMode;
+					runSystemCommand("/storage/.config/emuelec/scripts/setres.sh");
+				if(Utils::FileSystem::exists("/ee_s905")) {
+					runSystemCommand("systemctl restart emustation"); 
+				}
+			}, "NO",nullptr));
+		} else { 
 			if(Utils::FileSystem::exists("/storage/.config/EE_VIDEO_MODE")) {
 				runSystemCommand("echo $(cat /storage/.config/EE_VIDEO_MODE) > /sys/class/display/mode");
 				LOG(LogInfo) << "Setting custom video mode from /storage/.config/EE_VIDEO_MODE to " << runSystemCommand("cat /storage/.config/EE_VIDEO_MODE");
@@ -110,6 +125,7 @@ void GuiMenu::openEmuELECSettings()
 					}
 				}
 			}
+		 }
 		});
 	
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
@@ -432,7 +448,7 @@ void GuiMenu::openEmuELECSettings()
 		});
 	/* END CHOICE */
    
-	Window* window = mWindow;
+
 	
 	if (UIModeController::getInstance()->isUIModeFull())
 	{

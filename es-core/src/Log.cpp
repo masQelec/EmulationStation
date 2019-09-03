@@ -3,6 +3,7 @@
 #include "utils/FileSystemUtil.h"
 #include "platform.h"
 #include <iostream>
+#include "Settings.cpp"
 
 LogLevel Log::reportingLevel = LogInfo;
 FILE* Log::file = NULL; //fopen(getLogPath().c_str(), "w");
@@ -14,10 +15,13 @@ LogLevel Log::getReportingLevel()
 
 std::string Log::getLogPath()
 {
+	if (Settings::getInstance()->getString("LogPath") != "") {
+	return Settings::getInstance()->getString("LogPath") + "/es_log.txt";
+	} else {
 	std::string home = Utils::FileSystem::getHomePath();
 	return home + "/.config/emuelec/logs/es_log.txt"; /* < emuelec */
+	}
 }
-
 void Log::setReportingLevel(LogLevel level)
 {
 	reportingLevel = level;

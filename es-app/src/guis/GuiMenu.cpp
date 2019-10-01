@@ -70,6 +70,7 @@ void GuiMenu::openEmuELECSettings()
 			Settings::getInstance()->setBool("EmuELEC_wifi", wifi_enabled->getState());
 		});
 	    */
+	Window* window = mWindow;
 	std::string a;
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bgm_enabled->setState(Settings::getInstance()->getBool("BGM"));
@@ -378,7 +379,7 @@ void GuiMenu::openEmuELECSettings()
 		});
 	/* END CHOICE */
    
-	Window* window = mWindow;
+
 }
 /*  emuelec >*/
 

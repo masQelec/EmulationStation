@@ -33,7 +33,6 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 
 	addEntry("SOUND SETTINGS", 0x777777FF, true, [this] { openSoundSettings(); });
 
-
 	if (isFullUI)
 		addEntry("UI SETTINGS", 0x777777FF, true, [this] { openUISettings(); });
 
@@ -57,19 +56,6 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 void GuiMenu::openEmuELECSettings()
 {
 	auto s = new GuiSettings(mWindow, "EmuELEC Settings");
-	/* this randomly works, so I need to find a better implementation
-	    auto wifi_enabled = std::make_shared<SwitchComponent>(mWindow);
-		wifi_enabled->setState(Settings::getInstance()->getBool("EmuELEC_wifi"));
-		s->addWithLabel("ENABLE WIFI", wifi_enabled);
-		s->addSaveFunc([wifi_enabled] {
-			if (wifi_enabled->getState() == true) {
-				runSystemCommand("/storage/.emulationstation/scripts/wifi.sh &> /storage/.config/wifi.log &");                
-			} else {
-	            runSystemCommand("/storage/.emulationstation/scripts/wifi.sh disconnect &> /storage/.config/wifi.log &");                
-	        }
-			Settings::getInstance()->setBool("EmuELEC_wifi", wifi_enabled->getState());
-		});
-	    */
 	Window* window = mWindow;
 	std::string a;
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
@@ -83,6 +69,7 @@ void GuiMenu::openEmuELECSettings()
 			}
                 Settings::getInstance()->setBool("BGM", bgm_enabled->getState());
 			});
+
 		auto emuelec_bgm_boot_def = std::make_shared< OptionListComponent<std::string> >(mWindow, "START BGM AT BOOT", false);
 		std::vector<std::string> bgmboot;
 		bgmboot.push_back("Yes");
@@ -96,18 +83,6 @@ void GuiMenu::openEmuELECSettings()
 				Settings::getInstance()->setString("EmuELEC_BGM_BOOT",  emuelec_bgm_boot_def->getSelected());
 		});
 		
-       auto sshd_enabled = std::make_shared<SwitchComponent>(mWindow);
-		sshd_enabled->setState(Settings::getInstance()->getBool("SSH"));
-		s->addWithLabel("ENABLE SSH", sshd_enabled);
-		s->addSaveFunc([sshd_enabled] {
-			if (sshd_enabled->getState() == false) {
-				runSystemCommand("systemctl stop sshd"); 
-				} else { 
-				runSystemCommand("systemctl start sshd");
-			}
-                Settings::getInstance()->setBool("SSH", sshd_enabled->getState());
-			});
-			
        auto bezels_enabled = std::make_shared<SwitchComponent>(mWindow);
 		bezels_enabled->setState(Settings::getInstance()->getBool("EmuELEC_BEZELS"));
 		s->addWithLabel("ENABLE RA BEZELS", bezels_enabled);
@@ -379,6 +354,7 @@ void GuiMenu::openEmuELECSettings()
 		});
 	/* END CHOICE */
    
+   mWindow->pushGui(s);
 
 }
 /*  emuelec >*/

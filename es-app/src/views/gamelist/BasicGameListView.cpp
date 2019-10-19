@@ -151,7 +151,7 @@ std::vector<HelpPrompt> BasicGameListView::getHelpPrompts()
 	prompts.push_back(HelpPrompt("a", "lanzar"));
 	prompts.push_back(HelpPrompt("b", "atras"));
 	if(!UIModeController::getInstance()->isUIModeKid())
-		prompts.push_back(HelpPrompt("seleccionar", "opciones"));
+		prompts.push_back(HelpPrompt("select", "opciones"));
 	if(mRoot->getSystem()->isGameSystem())
 		prompts.push_back(HelpPrompt("x", "aleatorio"));
 	if(mRoot->getSystem()->isGameSystem() && !UIModeController::getInstance()->isUIModeKid())

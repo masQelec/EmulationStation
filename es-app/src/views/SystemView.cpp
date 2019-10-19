@@ -240,7 +240,7 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 	cancelAnimation(2);
 
 	std::string transition_style = Settings::getInstance()->getString("TransitionStyle");
-	bool goFast = transition_style == "instant";
+	bool goFast = transition_style == "instante";
 	const float infoStartOpacity = mSystemInfo.getOpacity() / 255.f;
 
 	Animation* infoFadeOut = new LambdaAnimation(
@@ -269,7 +269,7 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 		mSystemInfo.setOpacity((unsigned char)(Math::lerp(0.f, 1.f, t) * 255));
 	}, goFast ? 10 : 300);
 
-	// wait 600ms to fade in
+	// wait 600ms to desvanecer in
 	setAnimation(infoFadeIn, goFast ? 0 : 2000, nullptr, false, 2);
 
 	// no need to animate transition, we're not going anywhere (probably mEntries.size() == 1)
@@ -278,7 +278,7 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 
 	Animation* anim;
 	bool move_carousel = Settings::getInstance()->getBool("MoveCarousel");
-	if(transition_style == "fade")
+	if(transition_style == "desvanecer")
 	{
 		float startExtrasFade = mExtrasFadeOpacity;
 		anim = new LambdaAnimation(
@@ -305,7 +305,7 @@ void SystemView::onCursorChanged(const CursorState& /*state*/)
 				this->mExtrasCamOffset = endPos;
 
 		}, 500);
-	} else if (transition_style == "slide") {
+	} else if (transition_style == "diapositiva") {
 		// slide
 		anim = new LambdaAnimation(
 			[this, startPos, endPos, posMax, move_carousel](float t)

@@ -25,11 +25,11 @@ CollectionSystemManager* CollectionSystemManager::sInstance = NULL;
 CollectionSystemManager::CollectionSystemManager(Window* window) : mWindow(window)
 {
 	CollectionSystemDecl systemDecls[] = {
-		//type                  name            long name            //default sort              // theme folder            // isCustom
-		{ AUTO_ALL_GAMES,       "all",          "all games",         "filename, ascending",      "auto-allgames",           false },
-		{ AUTO_LAST_PLAYED,     "recent",       "last played",       "last played, descending",  "auto-lastplayed",         false },
-		{ AUTO_FAVORITES,       "favorites",    "favorites",         "filename, ascending",      "auto-favorites",          false },
-		{ CUSTOM_COLLECTION,    myCollectionsName,  "collections",    "filename, ascending",      "custom-collections",      true }
+		//type                  name            	long name         	//default sort              		// theme folder            // isCustom
+		{ AUTO_ALL_GAMES,       "todo",          	"todos los juegos", "nombre de archivo, ascendente",    "auto-allgames",           false },
+		{ AUTO_LAST_PLAYED,     "reciente",       	"último jugado",    "último jugado, descendente",  		"auto-lastplayed",         false },
+		{ AUTO_FAVORITES,       "favoritos",    	"favoritos",        "nombre de archivo, ascendente",    "auto-favoritos",          false },
+		{ CUSTOM_COLLECTION,    myCollectionsName,  "colecciónes",    	"nombre de archivo, ascendente",    "custom-collections",      true }
 	};
 
 	// create a map

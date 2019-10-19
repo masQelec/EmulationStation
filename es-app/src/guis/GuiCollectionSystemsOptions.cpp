@@ -62,7 +62,7 @@ void GuiCollectionSystemsOptions::initializeMenu()
 		createCollection(name);
 	};
 	row.makeAcceptInputHandler([this, createCustomCollection] {
-		mWindow->pushGui(new GuiTextEditPopup(mWindow, "New Collection Name", "", createCustomCollection, false));
+		mWindow->pushGui(new GuiTextEditPopup(mWindow, "Nuevo nombre de colección", "", createCustomCollection, false));
 	});
 
 	mMenu.addRow(row);

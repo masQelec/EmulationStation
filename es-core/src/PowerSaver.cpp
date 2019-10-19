@@ -53,11 +53,11 @@ void PowerSaver::updateMode()
 {
 	std::string mode = Settings::getInstance()->getString("PowerSaverMode");
 
-	if (mode == "disabled") {
+	if (mode == "desactivado") {
 		mMode = DISABLED;
-	} else if (mode == "instant") {
+	} else if (mode == "instante") {
 		mMode = INSTANT;
-	} else if (mode == "enhanced") {
+	} else if (mode == "mejorado") {
 		mMode = ENHANCED;
 	} else {
 		mMode = DEFAULT;
@@ -72,7 +72,7 @@ bool PowerSaver::getState()
 
 void PowerSaver::setState(bool state)
 {
-	bool ps_enabled = Settings::getInstance()->getString("PowerSaverMode") != "disabled";
+	bool ps_enabled = Settings::getInstance()->getString("PowerSaverMode") != "desactivado";
 	mState = ps_enabled && state;
 }
 

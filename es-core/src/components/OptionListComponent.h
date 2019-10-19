@@ -100,7 +100,7 @@ private:
 					mParent->onSelectedChanged();
 				});
 
-				mMenu.addButton("SELECCIONAR NINGUNO", "select none", [this, checkboxes] {
+				mMenu.addButton("SIN SELECCIONAR", "select none", [this, checkboxes] {
 					for(unsigned int i = 0; i < mParent->mEntries.size(); i++)
 					{
 						mParent->mEntries.at(i).selected = false;

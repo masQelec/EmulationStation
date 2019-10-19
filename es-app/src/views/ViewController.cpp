@@ -66,7 +66,7 @@ void ViewController::goToStart()
 
 void ViewController::ReloadAndGoToStart()
 {
-	mWindow->renderLoadingScreen("Loading...");
+	mWindow->renderLoadingScreen("Cargando...");
 	ViewController::get()->reloadAll();
 	ViewController::get()->goToStart();
 }
@@ -445,14 +445,14 @@ void ViewController::preload()
 
 	bool splash = Settings::getInstance()->getBool("SplashScreen") && Settings::getInstance()->getBool("SplashScreenProgress");
 	if (splash)
-		mWindow->renderLoadingScreen("Preloading UI", (float)i / (float)max);
+		mWindow->renderLoadingScreen("Precargando UI", (float)i / (float)max);
 
 	for(auto it = SystemData::sSystemVector.cbegin(); it != SystemData::sSystemVector.cend(); it++)
 	{
 		if (splash)
 		{
 			i++;
-			mWindow->renderLoadingScreen("Preloading UI", (float)i / (float)max);
+			mWindow->renderLoadingScreen("Precargando UI", (float)i / (float)max);
 		}
 
 		(*it)->getIndex()->resetFilters();

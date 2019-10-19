@@ -379,11 +379,11 @@ void Window::setHelpPrompts(const std::vector<HelpPrompt>& prompts, const HelpSt
 				// yes, it has!
 
 				// can we combine? (dpad only)
-				if((it->first == "up/down" && addPrompts.at(mappedTo->second).first != "left/right") ||
-					(it->first == "left/right" && addPrompts.at(mappedTo->second).first != "up/down"))
+				if((it->first == "arriba/abajo" && addPrompts.at(mappedTo->second).first != "izquierda/derecha") ||
+					(it->first == "izquierda/derecha" && addPrompts.at(mappedTo->second).first != "arriba/abajo"))
 				{
 					// yes!
-					addPrompts.at(mappedTo->second).first = "up/down/left/right";
+					addPrompts.at(mappedTo->second).first = "arriba/abajo/izquierda/derecha";
 					// don't need to add this to addPrompts since we just merged
 				}else{
 					// no, we can't combine!
@@ -401,9 +401,9 @@ void Window::setHelpPrompts(const std::vector<HelpPrompt>& prompts, const HelpSt
 	std::sort(addPrompts.begin(), addPrompts.end(), [](const HelpPrompt& a, const HelpPrompt& b) -> bool {
 
 		static const char* map[] = {
-			"up/down/left/right",
-			"up/down",
-			"left/right",
+			"arriba/abajo/izquierda/derecha",
+			"arriba/abajo",
+			"izquierda/derecha",
 			"a", "b", "x", "y", "l", "r",
 			"start", "select",
 			NULL

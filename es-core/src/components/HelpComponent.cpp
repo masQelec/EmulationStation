@@ -15,9 +15,9 @@
 #define ENTRY_SPACING 16 // space between [text] and next [icon] (px)
 
 static const std::map<std::string, const char*> ICON_PATH_MAP {
-	{ "up/down", ":/help/dpad_updown.svg" },
-	{ "left/right", ":/help/dpad_leftright.svg" },
-	{ "up/down/left/right", ":/help/dpad_all.svg" },
+	{ "arriba/abajo", ":/help/dpad_updown.svg" },
+	{ "izquierda/derecha", ":/help/dpad_leftright.svg" },
+	{ "arriba/abajo/izquierda/derecha", ":/help/dpad_all.svg" },
 	{ "a", ":/help/button_a.svg" },
 	{ "b", ":/help/button_b.svg" },
 	{ "x", ":/help/button_x.svg" },

@@ -375,14 +375,14 @@ std::vector<HelpPrompt> SystemView::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts;
 	if (mCarousel.type == VERTICAL || mCarousel.type == VERTICAL_WHEEL)
-		prompts.push_back(HelpPrompt("up/down", "choose"));
+		prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
 	else
-		prompts.push_back(HelpPrompt("left/right", "choose"));
-	prompts.push_back(HelpPrompt("a", "select"));
-	prompts.push_back(HelpPrompt("x", "random"));
+		prompts.push_back(HelpPrompt("izquierda/derecha", "escoger"));
+	prompts.push_back(HelpPrompt("a", "selecciónar"));
+	prompts.push_back(HelpPrompt("x", "aleatorio"));
 
 	if (!UIModeController::getInstance()->isUIModeKid() && Settings::getInstance()->getBool("ScreenSaverControls"))
-		prompts.push_back(HelpPrompt("select", "launch screensaver"));
+		prompts.push_back(HelpPrompt("select", "lanzar salva pantallas"));
 
 	return prompts;
 }

@@ -154,9 +154,9 @@ void ViewController::playViewTransition()
 		return;
 
 	std::string transition_style = Settings::getInstance()->getString("TransitionStyle");
-	if(transition_style == "desvanecer")
+	if(transition_style == "fade")
 	{
-		// desvanecer
+		// fade
 		// stop whatever's currently playing, leaving mFadeOpacity wherever it is
 		cancelAnimation(0);
 
@@ -164,7 +164,7 @@ void ViewController::playViewTransition()
 			mFadeOpacity = Math::lerp(0, 1, t);
 		};
 
-		const static int FADE_DURATION = 240; // desvanecer in/out time
+		const static int FADE_DURATION = 240; // fade in/out time
 		const static int FADE_WAIT = 320; // time to wait between in/out
 		setAnimation(new LambdaAnimation(fadeFunc, FADE_DURATION), 0, [this, fadeFunc, target] {
 			this->mCamera.translation() = -target;
@@ -182,7 +182,7 @@ void ViewController::playViewTransition()
 		}else{
 			advanceAnimation(0, (int)(mFadeOpacity * FADE_DURATION));
 		}
-	} else if (transition_style == "diapositiva"){
+	} else if (transition_style == "slide"){
 		// slide or simple slide
 		setAnimation(new MoveCameraAnimation(mCamera, target));
 		updateHelpPrompts(); // update help prompts immediately
@@ -225,7 +225,7 @@ void ViewController::launch(FileData* game, Vector3f center)
 	mLockInput = true;
 
 	std::string transition_style = Settings::getInstance()->getString("TransitionStyle");
-	if(transition_style == "desvanecer")
+	if(transition_style == "fade")
 	{
 		// fade out, launch game, fade back in
 		auto fadeFunc = [this](float t) {
@@ -237,7 +237,7 @@ void ViewController::launch(FileData* game, Vector3f center)
 			setAnimation(new LambdaAnimation(fadeFunc, 800), 0, [this] { mLockInput = false; }, true);
 			this->onFileChanged(game, FILE_METADATA_CHANGED);
 		});
-	} else if (transition_style == "diapositiva"){
+	} else if (transition_style == "slide"){
 		// move camera to zoom in on center + fade out, launch game, come back in
 		setAnimation(new LaunchAnimation(mCamera, mFadeOpacity, center, 1500), 0, [this, origCamera, center, game]
 		{

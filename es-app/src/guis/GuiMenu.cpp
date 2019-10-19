@@ -470,7 +470,7 @@ void GuiMenu::openSoundSettings()
 				&& !Settings::getInstance()->getBool("EnableSounds")
 				&& PowerSaver::getMode() == PowerSaver::INSTANT)
 			{
-				Settings::getInstance()->setString("PowerSaverMode", "por defecto");
+				Settings::getInstance()->setString("PowerSaverMode", "default");
 				PowerSaver::init();
 			}
 			Settings::getInstance()->setBool("EnableSounds", sounds_enabled->getState());
@@ -483,7 +483,7 @@ void GuiMenu::openSoundSettings()
 
 #ifdef _RPI_
 		// OMX player Audio Device
-		auto omx_audio_dev = std::make_shared< OptionListComponent<std::string> >(mWindow, "DISPOSITIVO DE SONIDO OMX REPRODUCTOR", false);
+		auto omx_audio_dev = std::make_shared< OptionListComponent<std::string> >(mWindow, "DISPOSITIVO DE SONIDO OMX PLAYER", false);
 		std::vector<std::string> omx_cards;
 		// RPi Specific  Audio Cards
 		omx_cards.push_back("local");
@@ -498,7 +498,7 @@ void GuiMenu::openSoundSettings()
 		}
 		for (auto it = omx_cards.cbegin(); it != omx_cards.cend(); it++)
 			omx_audio_dev->add(*it, *it, Settings::getInstance()->getString("OMXAudioDev") == *it);
-		s->addWithLabel("DISPOSITIVO DE SONIDO OMX REPRODUCTOR", omx_audio_dev);
+		s->addWithLabel("DISPOSITIVO DE SONIDO OMX PLAYER", omx_audio_dev);
 		s->addSaveFunc([omx_audio_dev] {
 			if (Settings::getInstance()->getString("OMXAudioDev") != omx_audio_dev->getSelected())
 				Settings::getInstance()->setString("OMXAudioDev", omx_audio_dev->getSelected());
@@ -563,7 +563,7 @@ void GuiMenu::openUISettings()
 			&& !Settings::getInstance()->getBool("MoveCarousel")
 			&& PowerSaver::getMode() == PowerSaver::INSTANT)
 		{
-			Settings::getInstance()->setString("PowerSaverMode", "por defecto");
+			Settings::getInstance()->setString("PowerSaverMode", "default");
 			PowerSaver::init();
 		}
 		Settings::getInstance()->setBool("MoveCarousel", move_carousel->getState());
@@ -572,18 +572,18 @@ void GuiMenu::openUISettings()
 	// transition style
 	auto transition_style = std::make_shared< OptionListComponent<std::string> >(mWindow, "ESTILO DE TRANSICIÓN", false);
 	std::vector<std::string> transitions;
-	transitions.push_back("desvanecer");
-	transitions.push_back("diapositiva");
-	transitions.push_back("instante");
+	transitions.push_back("fade");
+	transitions.push_back("slide");
+	transitions.push_back("instant");
 	for(auto it = transitions.cbegin(); it != transitions.cend(); it++)
 		transition_style->add(*it, *it, Settings::getInstance()->getString("TransitionStyle") == *it);
 	s->addWithLabel("TRANSITION STYLE", transition_style);
 	s->addSaveFunc([transition_style] {
-		if (Settings::getInstance()->getString("TransitionStyle") == "instante"
-			&& transition_style->getSelected() != "instante"
+		if (Settings::getInstance()->getString("TransitionStyle") == "instant"
+			&& transition_style->getSelected() != "instant"
 			&& PowerSaver::getMode() == PowerSaver::INSTANT)
 		{
-			Settings::getInstance()->setString("PowerSaverMode", "por defecto");
+			Settings::getInstance()->setString("PowerSaverMode", "default");
 			PowerSaver::init();
 		}
 		Settings::getInstance()->setString("TransitionStyle", transition_style->getSelected());
@@ -626,11 +626,11 @@ void GuiMenu::openUISettings()
 	// GameList view style
 	auto gamelist_style = std::make_shared< OptionListComponent<std::string> >(mWindow, "ESTILO DE LA LISTA DE JUEGOS", false);
 	std::vector<std::string> styles;
-	styles.push_back("automatico");
-	styles.push_back("basico");
-	styles.push_back("detallado");
+	styles.push_back("automatic");
+	styles.push_back("basic");
+	styles.push_back("detailed");
 	styles.push_back("video");
-	styles.push_back("cuadrícula");
+	styles.push_back("grid");
 
 	for (auto it = styles.cbegin(); it != styles.cend(); it++)
 		gamelist_style->add(*it, *it, Settings::getInstance()->getString("GamelistViewStyle") == *it);
@@ -692,16 +692,16 @@ void GuiMenu::openOtherSettings()
 	// power saver
 	auto power_saver = std::make_shared< OptionListComponent<std::string> >(mWindow, "MODOS DE AHORRO DE ENERGÍA", false);
 	std::vector<std::string> modes;
-	modes.push_back("desactivado");
-	modes.push_back("por defecto");
-	modes.push_back("mejorado");
-	modes.push_back("instante");
+	modes.push_back("disabled");
+	modes.push_back("default");
+	modes.push_back("enhanced");
+	modes.push_back("instant");
 	for (auto it = modes.cbegin(); it != modes.cend(); it++)
 		power_saver->add(*it, *it, Settings::getInstance()->getString("PowerSaverMode") == *it);
 	s->addWithLabel("MODOS DE AHORRO DE ENERGÍA", power_saver);
 	s->addSaveFunc([this, power_saver] {
-		if (Settings::getInstance()->getString("PowerSaverMode") != "instante" && power_saver->getSelected() == "instante") {
-			Settings::getInstance()->setString("TransitionStyle", "instante");
+		if (Settings::getInstance()->getString("PowerSaverMode") != "instant" && power_saver->getSelected() == "instant") {
+			Settings::getInstance()->setString("TransitionStyle", "instant");
 			Settings::getInstance()->setBool("MoveCarousel", false);
 			Settings::getInstance()->setBool("EnableSounds", false);
 		}

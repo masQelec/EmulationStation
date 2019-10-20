@@ -361,7 +361,7 @@ void GuiMenu::openEmuELECSettings()
 
 void GuiMenu::openScraperSettings()
 {
-	auto s = new GuiSettings(mWindow, "SCRAPER");
+	auto s = new GuiSettings(mWindow, "RASPADOR");
 
 	// scrape from
 	auto scraper_list = std::make_shared< OptionListComponent< std::string > >(mWindow, "RASPADO DE", false);
@@ -668,7 +668,7 @@ void GuiMenu::openUISettings()
 	// enable filters (ForceDisableFilters)
 	auto enable_filter = std::make_shared<SwitchComponent>(mWindow);
 	enable_filter->setState(!Settings::getInstance()->getBool("ForceDisableFilters"));
-	s->addWithLabel("ENABLE FILTERS", enable_filter);
+	s->addWithLabel("ACTIVAR FILTROS", enable_filter);
 	s->addSaveFunc([enable_filter] {
 		bool filter_is_enabled = !Settings::getInstance()->getBool("ForceDisableFilters");
 		Settings::getInstance()->setBool("ForceDisableFilters", !enable_filter->getState());
@@ -864,7 +864,7 @@ std::vector<HelpPrompt> GuiMenu::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts;
 	prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
-	prompts.push_back(HelpPrompt("a", "selecciónar"));
+	prompts.push_back(HelpPrompt("a", "seleccionar"));
 	prompts.push_back(HelpPrompt("start", "cerrar"));
 	return prompts;
 }

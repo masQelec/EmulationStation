@@ -250,8 +250,8 @@ void GuiMetaDataEd::close(bool closeAllWindows)
 	{
 		// changes were made, ask if the user wants to save them
 		mWindow->pushGui(new GuiMsgBox(mWindow,
-			"SAVE CHANGES?",
-			"YES", [this, closeFunc] { save(); closeFunc(); },
+			"¿SALVAR CAMBIOS?",
+			"SI", [this, closeFunc] { save(); closeFunc(); },
 			"NO", closeFunc
 		));
 	}else{
@@ -277,7 +277,7 @@ bool GuiMetaDataEd::input(InputConfig* config, Input input)
 std::vector<HelpPrompt> GuiMetaDataEd::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts = mGrid.getHelpPrompts();
-	prompts.push_back(HelpPrompt("b", "back"));
-	prompts.push_back(HelpPrompt("start", "close"));
+	prompts.push_back(HelpPrompt("b", "atrás"));
+	prompts.push_back(HelpPrompt("start", "cerrar"));
 	return prompts;
 }

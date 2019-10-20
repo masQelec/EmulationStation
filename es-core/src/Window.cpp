@@ -405,7 +405,7 @@ void Window::setHelpPrompts(const std::vector<HelpPrompt>& prompts, const HelpSt
 			"arriba/abajo",
 			"izquierda/derecha",
 			"a", "b", "x", "y", "l", "r",
-			"start", "select",
+			"start", "seleccionar",
 			NULL
 		};
 

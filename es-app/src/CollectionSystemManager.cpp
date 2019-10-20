@@ -27,7 +27,7 @@ CollectionSystemManager::CollectionSystemManager(Window* window) : mWindow(windo
 	CollectionSystemDecl systemDecls[] = {
 		//type                  name            	long name         	//default sort              		// theme folder            // isCustom
 		{ AUTO_ALL_GAMES,       "todo",          	"todos los juegos", "nombre de archivo, ascendente",    "auto-allgames",           false },
-		{ AUTO_LAST_PLAYED,     "reciente",       	"último jugado",    "último jugado, descendente",  		"auto-lastplayed",         false },
+		{ AUTO_LAST_PLAYED,     "reciente",       	"ultimo jugado",    "ultimo jugado, descendente",  		"auto-lastplayed",         false },
 		{ AUTO_FAVORITES,       "favoritos",    	"favoritos",        "nombre de archivo, ascendente",    "auto-favoritos",          false },
 		{ CUSTOM_COLLECTION,    myCollectionsName,  "colecciónes",    	"nombre de archivo, ascendente",    "custom-collections",      true }
 	};

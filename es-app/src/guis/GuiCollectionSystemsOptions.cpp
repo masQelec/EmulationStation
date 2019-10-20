@@ -62,7 +62,7 @@ void GuiCollectionSystemsOptions::initializeMenu()
 		createCollection(name);
 	};
 	row.makeAcceptInputHandler([this, createCustomCollection] {
-		mWindow->pushGui(new GuiTextEditPopup(mWindow, "Nuevo nombre de colección", "", createCustomCollection, false));
+		mWindow->pushGui(new GuiTextEditPopup(mWindow, "Nuevo nombre", "", createCustomCollection, false));
 	});
 
 	mMenu.addRow(row);
@@ -214,9 +214,16 @@ bool GuiCollectionSystemsOptions::input(InputConfig* config, Input input)
 	return false;
 }
 
+HelpStyle GuiMenu::getHelpStyle()
+{
+	HelpStyle style = HelpStyle();
+	style.applyTheme(ViewController::get()->getState().getSystem()->getTheme(), "system");
+	return style;
+}
+
 std::vector<HelpPrompt> GuiCollectionSystemsOptions::getHelpPrompts()
 {
 	std::vector<HelpPrompt> prompts = mMenu.getHelpPrompts();
-	prompts.push_back(HelpPrompt("b", "back"));
+	prompts.push_back(HelpPrompt("b", "atrás"));
 	return prompts;
 }

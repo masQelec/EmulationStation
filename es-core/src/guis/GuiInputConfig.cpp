@@ -193,7 +193,7 @@ GuiInputConfig::GuiInputConfig(Window* window, InputConfig* target, bool reconfi
 		if (!mTargetConfig->getInputByName("HotKeyEnable", &input)) {
 			mWindow->pushGui(new GuiMsgBox(mWindow,
 				"USTED NO ELIGIÓ UN BOTÓN DE ACTIVACIÓN DE HOTKEY. ESTE ES REQUERIDO PARA SALIR DE LOS JUEGOS CON UN CONTROLADOR. ¿DESEA USAR EL BOTÓN SELECCIONADO POR DEFECTO? POR FAVOR, RESPONDA SÍ PARA SELECCIONAR O NO PARA NO CONFIGURAR.",
-				"YES", [this, okFunction] {
+				"SI", [this, okFunction] {
 					Input input;
 					mTargetConfig->getInputByName("Select", &input);
 					mTargetConfig->mapInput("HotKeyEnable", input);

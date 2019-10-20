@@ -369,14 +369,14 @@ bool SystemData::loadConfig(Window* window)
 		delete pThreadPool;
 
 		if (window != NULL)
-			window->renderLoadingScreen("Favorites", systemCount == 0 ? 0 : currentSystem / systemCount);
+			window->renderLoadingScreen("Favoritos", systemCount == 0 ? 0 : currentSystem / systemCount);
 
 		CollectionSystemManager::get()->updateSystemsList();
 	}
 	else
 	{
 		if (window != NULL)
-			window->renderLoadingScreen("Favorites", systemCount == 0 ? 0 : currentSystem / systemCount);
+			window->renderLoadingScreen("Favoritos", systemCount == 0 ? 0 : currentSystem / systemCount);
 
 		CollectionSystemManager::get()->loadCollectionSystems();
 	}

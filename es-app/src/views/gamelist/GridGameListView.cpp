@@ -47,7 +47,7 @@ GridGameListView::GridGameListView(Window* window, FileData* root) :
 	mLblPlayers.setText("Jugadores: ");
 	addChild(&mLblPlayers);
 	addChild(&mPlayers);
-	mLblLastPlayed.setText("Último jugado: ");
+	mLblLastPlayed.setText("Ultimo jugado: ");
 	addChild(&mLblLastPlayed);
 	mLastPlayed.setDisplayRelative(true);
 	addChild(&mLastPlayed);
@@ -379,7 +379,7 @@ std::vector<HelpPrompt> GridGameListView::getHelpPrompts()
 		prompts.push_back(HelpPrompt("lr", "sistema"));
 	prompts.push_back(HelpPrompt("arriba/abajo/izquierda/derecha", "escoger"));
 	prompts.push_back(HelpPrompt("a", "lanzar"));
-	prompts.push_back(HelpPrompt("b", "atras"));
+	prompts.push_back(HelpPrompt("b", "atrás"));
 	if(!UIModeController::getInstance()->isUIModeKid())
 		prompts.push_back(HelpPrompt("select", "opciones"));
 	if(mRoot->getSystem()->isGameSystem())

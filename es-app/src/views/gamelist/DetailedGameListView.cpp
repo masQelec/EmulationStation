@@ -50,7 +50,7 @@ DetailedGameListView::DetailedGameListView(Window* window, FileData* root) :
 	mLblPlayers.setText("Jugadores: ");
 	addChild(&mLblPlayers);
 	addChild(&mPlayers);
-	mLblLastPlayed.setText("Último jugado: ");
+	mLblLastPlayed.setText("Ultimo jugado: ");
 	addChild(&mLblLastPlayed);
 	mLastPlayed.setDisplayRelative(true);
 	addChild(&mLastPlayed);

@@ -378,7 +378,7 @@ std::vector<HelpPrompt> SystemView::getHelpPrompts()
 		prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
 	else
 		prompts.push_back(HelpPrompt("izquierda/derecha", "escoger"));
-	prompts.push_back(HelpPrompt("a", "selecciónar"));
+	prompts.push_back(HelpPrompt("a", "seleccionar"));
 	prompts.push_back(HelpPrompt("x", "aleatorio"));
 
 	if (!UIModeController::getInstance()->isUIModeKid() && Settings::getInstance()->getBool("ScreenSaverControls"))

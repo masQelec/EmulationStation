@@ -149,7 +149,7 @@ std::vector<HelpPrompt> BasicGameListView::getHelpPrompts()
 		prompts.push_back(HelpPrompt("izquierda/derecha", "sistema"));
 	prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
 	prompts.push_back(HelpPrompt("a", "lanzar"));
-	prompts.push_back(HelpPrompt("b", "atras"));
+	prompts.push_back(HelpPrompt("b", "atrás"));
 	if(!UIModeController::getInstance()->isUIModeKid())
 		prompts.push_back(HelpPrompt("select", "opciones"));
 	if(mRoot->getSystem()->isGameSystem())

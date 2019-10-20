@@ -31,7 +31,7 @@ static const InputConfigStructure GUI_INPUT_CONFIG_LIST[inputCount] =
 	{ "LeftShoulder",     true,  "GATILLO IZQUIERDO",   			":/help/button_l.svg" },
 	{ "RightShoulder",    true,  "GATILLO DERECHO",     			":/help/button_r.svg" },
 	{ "LeftTrigger",      true,  "SUPERIOR IZQUIERDO",  			":/help/button_lt.svg" },
-	{ "RightTrigger",     true,  "SUPERIOR DERACHO",    			":/help/button_rt.svg" },
+	{ "RightTrigger",     true,  "SUPERIOR DERECHO",    			":/help/button_rt.svg" },
 	{ "LeftThumb",        true,  "PULSADOR IZQUIERDO",         		":/help/analog_thumb.svg" },
 	{ "RightThumb",       true,  "PULSADOR DERECHO",        		":/help/analog_thumb.svg" },
 	{ "LeftAnalogUp",     true,  "IZQUIERDO ANALÓGICO ARRIBA",     	":/help/analog_up.svg" },

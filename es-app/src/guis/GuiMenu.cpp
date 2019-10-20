@@ -789,9 +789,9 @@ void GuiMenu::openQuitMenu()
 		}, "NO", nullptr));
 	});
 	/*row.addElement(std::make_shared<TextComponent>(window, "VOLVER A KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);*/
+	s->addRow(row);
 
-	mWindow->pushGui(s);
+	mWindow->pushGui(s);*/
 }
 /*  emuelec > */
 

@@ -90,8 +90,8 @@ void Settings::setDefaults()
 	mBoolMap["ShowExit"] = true;
 	mBoolMap["FullscreenBorderless"] = false;
 	mBoolMap["Windowed"] = false;
-	mBoolMap["SplashScreen"] = true;
-	mBoolMap["SplashScreenProgress"] = true;
+	mBoolMap["SplashScreen"] = false;
+	mBoolMap["SplashScreenProgress"] = false;
 	mStringMap["StartupSystem"] = "";
 
 	mBoolMap["VSync"] = true;

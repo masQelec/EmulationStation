@@ -45,7 +45,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MENÚ PR
 	if (isFullUI)
 		addEntry("CONFIGURAR ENTRADA", 0x777777FF, true, [this] { openConfigInput(); });
 
-	addEntry("SALIR", 0x777777FF, true, [this] {openQuitMenu(); });
+	addEntry("SALIR", 0x777777FF, false, [this] {openQuitMenu(); });
 
 	addChild(&mMenu);
 	addVersionInfo();

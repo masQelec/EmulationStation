@@ -780,7 +780,7 @@ void GuiMenu::openQuitMenu()
 		[window] {
 		Scripting::fireEvent("quit");
 		quitES();
-	}, "NO", nullptr));
+	}, "NO", nullptr);
 	);
 }
 /*  emuelec > */

@@ -775,19 +775,13 @@ void GuiMenu::openConfigInput()
 /* < emuelec */
 void GuiMenu::openQuitMenu()
 {
-	//auto s = new GuiSettings(mWindow, "SALIR");
-
 	Window* window = mWindow;
 	window->pushGui(new GuiMsgBox(window, "¿ESTA SEGURO QUE DESEA SALIR?", "SI",
 		[window] {
 		Scripting::fireEvent("quit");
 		quitES();
 	}, "NO", nullptr));
-	});
-	/*row.addElement(std::make_shared<TextComponent>(window, "VOLVER A KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
-
-	mWindow->pushGui(s);*/
+	);
 }
 /*  emuelec > */
 

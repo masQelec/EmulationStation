@@ -779,7 +779,7 @@ void GuiMenu::openQuitMenu()
 	window->pushGui(new GuiMsgBox(window, "¿ESTA SEGURO QUE DESEA SALIR?", "SI",
 		[window] {
 		Scripting::fireEvent("quit");
-		quitES();
+		//quitES();
 	}, "NO", nullptr);
 	);
 }

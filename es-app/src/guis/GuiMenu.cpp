@@ -21,7 +21,7 @@
 #include "platform.h"
 #include "utils/FileSystemUtil.h" /* < emuelec */
 
-GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MENU"), mVersion(window)
+GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MENÚ PRINCIPAL"), mVersion(window)
 {
 	bool isFullUI = UIModeController::getInstance()->isUIModeFull();
 
@@ -55,7 +55,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MAIN MEN
 /* < emuelec */
 void GuiMenu::openEmuELECSettings()
 {
-	auto s = new GuiSettings(mWindow, "Configuración de EmuELEC");
+	auto s = new GuiSettings(mWindow, "CONFIGURACIÓN DE EMUELEC");
 	Window* window = mWindow;
 	std::string a;
 	    auto bgm_enabled = std::make_shared<SwitchComponent>(mWindow);
@@ -788,8 +788,8 @@ void GuiMenu::openQuitMenu()
 			quitES();
 		}, "NO", nullptr));
 	});
-	row.addElement(std::make_shared<TextComponent>(window, "VOLVER A KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
-	s->addRow(row);
+	/*row.addElement(std::make_shared<TextComponent>(window, "VOLVER A KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
+	s->addRow(row);*/
 
 	mWindow->pushGui(s);
 }

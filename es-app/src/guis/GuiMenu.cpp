@@ -45,7 +45,7 @@ GuiMenu::GuiMenu(Window* window) : GuiComponent(window), mMenu(window, "MENÚ PR
 	if (isFullUI)
 		addEntry("CONFIGURAR ENTRADA", 0x777777FF, true, [this] { openConfigInput(); });
 
-	addEntry("QUITAR", 0x777777FF, true, [this] {openQuitMenu(); });
+	addEntry("SALIR", 0x777777FF, true, [this] {openQuitMenu(); });
 
 	addChild(&mMenu);
 	addVersionInfo();
@@ -778,15 +778,11 @@ void GuiMenu::openQuitMenu()
 	//auto s = new GuiSettings(mWindow, "SALIR");
 
 	Window* window = mWindow;
-
-	ComponentListRow row;
-	row.elements.clear();
-	row.makeAcceptInputHandler([window] {
-		window->pushGui(new GuiMsgBox(window, "¿ESTA SEGURO QUE DESEA SALIR?", "SI",
-			[] {
-			Scripting::fireEvent("quit");
-			quitES();
-		}, "NO", nullptr));
+	window->pushGui(new GuiMsgBox(window, "¿ESTA SEGURO QUE DESEA SALIR?", "SI",
+		[window] {
+		Scripting::fireEvent("quit");
+		quitES();
+	}, "NO", nullptr));
 	});
 	/*row.addElement(std::make_shared<TextComponent>(window, "VOLVER A KODI", Font::get(FONT_SIZE_MEDIUM), 0x777777FF), true);
 	s->addRow(row);

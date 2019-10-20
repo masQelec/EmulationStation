@@ -8,6 +8,7 @@
 #include "views/ViewController.h"
 #include "CollectionSystemManager.h"
 #include "Window.h"
+#include "SystemData.h"
 
 GuiCollectionSystemsOptions::GuiCollectionSystemsOptions(Window* window) : GuiComponent(window), mMenu(window, "AJUSTES DE COLECCIÓN DE JUEGO")
 {

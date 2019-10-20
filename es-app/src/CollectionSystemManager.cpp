@@ -55,7 +55,7 @@ CollectionSystemManager::CollectionSystemManager(Window* window) : mWindow(windo
 		Utils::FileSystem::createDirectory(path);
 
 	mIsEditingCustom = false;
-	mEditingCollection = "Favorites";
+	mEditingCollection = "Favoritos";
 	mEditingCollectionSystemData = NULL;
 	mCustomCollectionsBundle = NULL;
 }
@@ -449,7 +449,7 @@ void CollectionSystemManager::exitEditMode()
 	GuiInfoPopup* s = new GuiInfoPopup(mWindow, "Terminado de editar la '" + mEditingCollection + "' Colección.", 4000);
 	mWindow->setInfoPopup(s);
 	mIsEditingCustom = false;
-	mEditingCollection = "Favorites";
+	mEditingCollection = "Favoritos";
 }
 
 // adds or removes a game from a specific collection

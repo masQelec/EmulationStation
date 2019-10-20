@@ -214,7 +214,7 @@ bool GuiCollectionSystemsOptions::input(InputConfig* config, Input input)
 	return false;
 }
 
-HelpStyle GuiMenu::getHelpStyle()
+HelpStyle GuiCollectionSystemsOptions::getHelpStyle()
 {
 	HelpStyle style = HelpStyle();
 	style.applyTheme(ViewController::get()->getState().getSystem()->getTheme(), "system");

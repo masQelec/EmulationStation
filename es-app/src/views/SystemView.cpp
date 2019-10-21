@@ -8,8 +8,6 @@
 #include "Settings.h"
 #include "SystemData.h"
 #include "Window.h"
-#include "Scripting.h"
-#include "platform.h"
 
 // buffer values for scrolling velocity (left, stopped, right)
 const int logoBuffersLeft[] = { -5, -2, -1 };
@@ -203,17 +201,6 @@ bool SystemView::input(InputConfig* config, Input input)
 			mWindow->renderScreenSaver();
 			return true;
 		}
-		if(config->isMappedTo("b", input))
-		{
-			Window* window = mWindow;
-			window->pushGui(new GuiMsgBox(window, "¿ESTA SEGURO QUE DESEA SALIR?", "SI",
-				[window] {
-				Scripting::fireEvent("quit");
-				quitES();
-			}, "NO", nullptr)
-			);
-			return true;
-		}
 	}
 
 	return GuiComponent::input(config, input);
@@ -396,9 +383,7 @@ std::vector<HelpPrompt> SystemView::getHelpPrompts()
 
 	if (!UIModeController::getInstance()->isUIModeKid() && Settings::getInstance()->getBool("ScreenSaverControls"))
 		prompts.push_back(HelpPrompt("select", "lanzar salva pantallas"));
-	
-	prompts.push_back(HelpPrompt("b", "salir"));
-	
+
 	return prompts;
 }
 

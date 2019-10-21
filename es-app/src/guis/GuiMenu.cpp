@@ -82,30 +82,6 @@ void GuiMenu::openEmuELECSettings()
 			if (Settings::getInstance()->getString("EmuELEC_BGM_BOOT") != emuelec_bgm_boot_def->getSelected())
 				Settings::getInstance()->setString("EmuELEC_BGM_BOOT",  emuelec_bgm_boot_def->getSelected());
 		});
-		
-       auto bezels_enabled = std::make_shared<SwitchComponent>(mWindow);
-		bezels_enabled->setState(Settings::getInstance()->getBool("EmuELEC_BEZELS"));
-		s->addWithLabel("ACTIVAR RA BEZELS", bezels_enabled);
-		s->addSaveFunc([bezels_enabled] {
-			/* if (bezels_enabled->getState() == false) {
-				runSystemCommand("/emuelec/scripts/enable.sh bezels disable"); 
-				} else { 
-				runSystemCommand("/emuelec/scripts/enable.sh bezels enable"); 
-			} */
-                Settings::getInstance()->setBool("EmuELEC_BEZELS", bezels_enabled->getState());
-			});	
-       
-       auto splash_enabled = std::make_shared<SwitchComponent>(mWindow);
-		splash_enabled->setState(Settings::getInstance()->getBool("EmuELEC_SPLASH"));
-		s->addWithLabel("ACTIVAR RA SPLASH", splash_enabled);
-		s->addSaveFunc([splash_enabled] {
-		/*	if (splash_enabled->getState() == false) {
-				runSystemCommand("/emuelec/scripts/enable.sh splash disable"); 
-				} else { 
-				runSystemCommand("/emuelec/scripts/enable.sh splash enable"); 
-			} */
-                Settings::getInstance()->setBool("EmuELEC_SPLASH", splash_enabled->getState());
-			});
 
 	ComponentListRow row;
 	

@@ -20,6 +20,7 @@ std::string myCollectionsName = "collections";
 
 /* Handling the getting, initialization, deinitialization, saving and deletion of
  * a CollectionSystemManager Instance */
+ 
 CollectionSystemManager* CollectionSystemManager::sInstance = NULL;
 
 CollectionSystemManager::CollectionSystemManager(Window* window) : mWindow(window)

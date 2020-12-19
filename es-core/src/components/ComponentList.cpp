@@ -315,7 +315,7 @@ std::vector<HelpPrompt> ComponentList::getHelpPrompts()
 		bool addMovePrompt = true;
 		for(auto it = prompts.cbegin(); it != prompts.cend(); it++)
 		{
-			if(it->first == "up/down" || it->first == "up/down/left/right")
+			if(it->first == "arriba/abajo" || it->first == "arriba/abajo/izquierda/derecha")
 			{
 				addMovePrompt = false;
 				break;
@@ -323,7 +323,7 @@ std::vector<HelpPrompt> ComponentList::getHelpPrompts()
 		}
 
 		if(addMovePrompt)
-			prompts.push_back(HelpPrompt("up/down", "choose"));
+			prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
 	}
 
 	return prompts;

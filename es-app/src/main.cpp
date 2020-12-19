@@ -226,18 +226,18 @@ bool loadSystemConfigFile(Window* window, const char** errorString)
 	if(!SystemData::loadConfig(window))
 	{
 		LOG(LogError) << "Error while parsing systems configuration file!";
-		*errorString = "IT LOOKS LIKE YOUR SYSTEMS CONFIGURATION FILE HAS NOT BEEN SET UP OR IS INVALID. YOU'LL NEED TO DO THIS BY HAND, UNFORTUNATELY.\n\n"
-			"VISIT EMULATIONSTATION.ORG FOR MORE INFORMATION.";
+		*errorString = "PARECE QUE SU ARCHIVO DE CONFIGURACIÓN DE SISTEMAS NO SE HA CONFIGURADO O NO ES VÁLIDO NECESITARÁ HACER ESTO A MANO, DESAFORTUNADAMENTE.\n\n"
+			"VISITE EMULATIONSTATION.ORG PARA MÁS INFORMAÓION.";
 		return false;
 	}
 
 	if(SystemData::sSystemVector.size() == 0)
 	{
 		LOG(LogError) << "No systems found! Does at least one system have a game present? (check that extensions match!)\n(Also, make sure you've updated your es_systems.cfg for XML!)";
-		*errorString = ("WE CAN'T FIND ANY SYSTEMS!\n"
-			"CHECK THAT YOUR PATHS ARE CORRECT IN THE SYSTEMS CONFIGURATION FILE, "
-			"AND YOUR GAME DIRECTORY HAS AT LEAST ONE GAME WITH THE CORRECT EXTENSION.\n"
-			"OR INSERT A USB WITH YOUR ROMS AND THE '/roms/emuelecroms' FILE AND RESTART. \n\n  SSH/SFTP IP: " + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)")).c_str();
+		*errorString = ("¡NO PODEMOS ENCONTRAR NINGÚN SISTEMA!\n"
+			"COMPRUEBE QUE SUS RUTAS SON CORRECTAS EN EL ARCHIVO DE CONFIGURACIÓN DE SISTEMAS, "
+			"Y SU DIRECTORIO DE JUEGOS TIENE AL MENOS UN JUEGO CON LA EXTENSIÓN CORRECTA.\n"
+			"O INSERTE UN USB CON SUS ROMS EN EL DIRECTORIO '/roms/emuelecroms' Y REINICIE. \n\n  SSH/SFTP IP: " + getShOutput(R"(/storage/.emulationstation/scripts/ip.sh)")).c_str();
 		return false;
 	}
 
@@ -330,9 +330,9 @@ int main(int argc, char* argv[])
 
 		if (splashScreen)
 		{
-			std::string progressText = "Loading...";
+			std::string progressText = "Cargando...";
 			if (splashScreenProgress)
-				progressText = "Loading system config...";
+				progressText = "Cargando la configuración del sistema...";
 			window.renderLoadingScreen(progressText);
 		}
 	}
@@ -352,12 +352,12 @@ int main(int argc, char* argv[])
 		// we can't handle es_systems.cfg file problems inside ES itself, so display the error message then quit
 		window.pushGui(new GuiMsgBox(&window,
 			errorMsg,
-			"RESTART ES", [] {
+			"REINICIAR ES", [] {
 				runSystemCommand("systemctl restart emustation.service");
 				SDL_Event* quit = new SDL_Event();
 				quit->type = SDL_QUIT;
 				SDL_PushEvent(quit);
-			}, "RESTART SYSTEM", [] {
+			}, "REINICIAR SISTEMA", [] {
 				/* remove("/var/lock/start.games");
            	runSystemCommand("touch /var/lock/start.kodi"); */
 		        runSystemCommand("systemctl reboot");
@@ -378,7 +378,7 @@ int main(int argc, char* argv[])
 	ViewController::get()->preload();
 
 	if(splashScreen && splashScreenProgress)
-		window.renderLoadingScreen("Done.");
+		window.renderLoadingScreen("Hecho.");
 
 	//choose which GUI to open depending on if an input configuration already exists
 	if(errorMsg == NULL)

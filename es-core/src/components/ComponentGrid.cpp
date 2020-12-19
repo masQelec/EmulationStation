@@ -415,26 +415,26 @@ std::vector<HelpPrompt> ComponentGrid::getHelpPrompts()
 	bool canScrollHoriz = mGridSize.x() > 1;
 	for(auto it = prompts.cbegin(); it != prompts.cend(); it++)
 	{
-		if(it->first == "up/down/left/right")
+		if(it->first == "arriba/abajo/izquierda/derecha")
 		{
 			canScrollHoriz = false;
 			canScrollVert = false;
 			break;
-		}else if(it->first == "up/down")
+		}else if(it->first == "arriba/abajo")
 		{
 			canScrollVert = false;
-		}else if(it->first == "left/right")
+		}else if(it->first == "izquierda/derecha")
 		{
 			canScrollHoriz = false;
 		}
 	}
 
 	if(canScrollHoriz && canScrollVert)
-		prompts.push_back(HelpPrompt("up/down/left/right", "choose"));
+		prompts.push_back(HelpPrompt("arriba/abajo/izquierda/derecha", "escoger"));
 	else if(canScrollHoriz)
-		prompts.push_back(HelpPrompt("left/right", "choose"));
+		prompts.push_back(HelpPrompt("izquierda/derecha", "escoger"));
 	else if(canScrollVert)
-		prompts.push_back(HelpPrompt("up/down", "choose"));
+		prompts.push_back(HelpPrompt("arriba/abajo", "escoger"));
 
 	return prompts;
 }
